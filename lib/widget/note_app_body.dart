@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'custom_app_bar.dart';
-import 'note_item.dart';
+
 import 'package:gap/gap.dart';
+
+import 'note_item_list.dart';
 
 class NoteAppBody extends StatelessWidget {
   const NoteAppBody({
@@ -17,8 +19,7 @@ class NoteAppBody extends StatelessWidget {
         children: const [
           Gap(30),
           CustomAppBar(),
-          Gap(15),
-          NoteItem(),
+          Expanded(child: NoteItemList()),
         ],
       ),
     );

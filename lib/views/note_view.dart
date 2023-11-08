@@ -7,8 +7,10 @@ class NoteView extends StatelessWidget {
   static String id = 'home view id';
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: NoteAppBody(),
+    return Scaffold(
+      floatingActionButton:
+          FloatingActionButton(onPressed: () {}, child: const Icon(Icons.add)),
+      body: const NoteAppBody(),
     );
   }
 }
