@@ -18,7 +18,7 @@ class NoteAppBody extends StatelessWidget {
       child: Column(
         children: const [
           Gap(30),
-          CustomAppBar(),
+          CustomAppBar(title: 'Note' , icon: Icons.search,),
           Expanded(child: NoteItemList()),
         ],
       ),

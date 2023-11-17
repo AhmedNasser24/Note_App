@@ -6,26 +6,28 @@ import '../constant.dart';
 
 
 class CustomTextFormField extends StatelessWidget {
-  CustomTextFormField({
+  const CustomTextFormField({
     super.key,
-    required this.onChanged ,
+    this.onChanged ,
     required this.hintText,
     this.validator,
     this.keyboardType,
     this.contentPadding,
+    this.maxLines
   });
-  Function(String)? onChanged ;
+  final Function(String)? onChanged ;
   final String hintText;
-  TextInputType? keyboardType ;
-  String? Function(String?)? validator ;
-  EdgeInsetsGeometry? contentPadding ;
+  final TextInputType? keyboardType ;
+  final String? Function(String?)? validator ;
+  final EdgeInsetsGeometry? contentPadding ;
+  final int? maxLines ;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       validator: validator ,
       keyboardType: TextInputType.datetime,
       onChanged: onChanged ,
-      
+      maxLines: maxLines,
       decoration: InputDecoration(
         hintText: hintText,
         contentPadding: contentPadding,
