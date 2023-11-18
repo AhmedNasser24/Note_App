@@ -39,7 +39,7 @@ class NoteItem extends StatelessWidget {
                   )),
               subtitle: const Text(
                 'with Allah nothing is difficult',
-                style: TextStyle(fontSize: 20, color: Colors.black),
+                style: TextStyle(fontSize: 15, color: Colors.black),
               ),
             ),
             const Gap(15),
