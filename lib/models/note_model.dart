@@ -1,16 +1,21 @@
 import 'package:hive/hive.dart';
 part 'note_model.g.dart';
+
 @HiveType(typeId: 0)
 class NoteModel {
   @HiveField(0)
-  final String title ; 
+  final String title;
   @HiveField(1)
-  final String subTitle ;
+  final String subTitle;
   @HiveField(2)
-  final String date ;
+  final String date;
   @HiveField(3)
-  final int color ;
+  final int color;
 
-  const NoteModel({required this.title , required this.subTitle , required this.date , required this.color});
-
+  const NoteModel({
+    required this.title,
+    required this.subTitle,
+    required this.date,
+    required this.color,
+  });
 }
