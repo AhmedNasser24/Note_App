@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:note_app/cubits/note/note_cubit.dart';
 import 'package:note_app/models/note_model.dart';
 import 'package:note_app/widget/show_snack_bar.dart';
 
-import 'custom_note_item.dart';
+import 'note_item.dart';
 
 class NoteItemList extends StatelessWidget {
   const NoteItemList({
@@ -13,16 +14,19 @@ class NoteItemList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<NoteModel> notesList = NoteCubit().notesList;
-    return BlocBuilder<NoteCubit, NoteState>(
+    
+    return BlocBuilder<FetchAndDeleteNoteCubit, NoteState>(
       builder: (context, state) {
-        if ( state is NoteFailure ) {
-          showSnackBar(context, state.errMessage) ;
-        }
-        return ListView.builder(
-          padding: const EdgeInsets.only(top: 5),
-          itemCount: notesList.length,
-          itemBuilder: (context, index) =>  NoteItem(note: notesList[index]),
+        
+        List<NoteModel> notesList = BlocProvider.of<FetchAndDeleteNoteCubit>(context).notesList;
+        print('length : ${notesList.length}') ;
+        return ModalProgressHUD(
+          inAsyncCall: state is NoteLoading ? true : false,
+          child: ListView.builder(
+            padding: const EdgeInsets.only(top: 5),
+            itemCount: notesList.length,
+            itemBuilder: (context, index) =>  NoteItem(note: notesList[index] , index: index,),
+          ),
         );
       },
     );

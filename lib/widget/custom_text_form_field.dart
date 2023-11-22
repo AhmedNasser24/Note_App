@@ -20,11 +20,12 @@ class CustomTextFormField extends StatelessWidget {
   final String? Function(String?)? validator;
   final EdgeInsetsGeometry? contentPadding;
   final int? maxLines;
+
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       validator: validator,
-      keyboardType: TextInputType.datetime,
+      keyboardType: keyboardType,
       onChanged: onChanged,
       onSaved: onSaved,
       maxLines: maxLines,

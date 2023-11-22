@@ -21,7 +21,7 @@ class _AddNoteBottomSheetState extends State<AddNoteBottomSheet> {
       child: BlocConsumer<AddNoteCubit, AddNoteState>(
         listener: (context, state) {
           if (state is AddNoteSuccess) {
-            BlocProvider.of<NoteCubit>(context).fetchAllNotes() ;
+            BlocProvider.of<FetchAndDeleteNoteCubit>(context).fetchAllNotes() ;
             Navigator.pop(context);
           } else if (state is AddNoteFailure) {
             print('error message : ${state.errMessage}');

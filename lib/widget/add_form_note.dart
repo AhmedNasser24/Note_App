@@ -20,7 +20,7 @@ class _AddFormNoteState extends State<AddFormNote> {
   final GlobalKey<FormState> formKey = GlobalKey();
 
   String? title, subtitle;
-
+  AutovalidateMode autovalidateMode = AutovalidateMode.disabled ;
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -74,6 +74,11 @@ class _AddFormNoteState extends State<AddFormNote> {
                         color: Colors.blue.value);
                     BlocProvider.of<AddNoteCubit>(context)
                         .addNote(newNote: newNote);
+                  }else {
+                    autovalidateMode = AutovalidateMode.always ;
+                    setState(() {
+                      
+                    });
                   }
                 },
                 textColor: Colors.black,

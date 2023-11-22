@@ -5,18 +5,25 @@ import 'package:note_app/models/note_model.dart';
 
 part 'note_state.dart';
 
-class NoteCubit extends Cubit<NoteState> {
-  NoteCubit() : super(NoteInitial()){
-    fetchAllNotes() ;
+class FetchAndDeleteNoteCubit extends Cubit<NoteState> {
+  FetchAndDeleteNoteCubit() : super(NoteInitial()) {
+    fetchAllNotes();
   }
-  List<NoteModel> notesList = [] ;
+  List<NoteModel> notesList = [];
   fetchAllNotes() {
+    Box<NoteModel> notes = Hive.box<NoteModel>(kNotesBox);
+    notesList = notes.values.toList();
+  }
+
+  deleteNote(int index) async {
+    emit(NoteLoading());
     try {
-      Box<NoteModel> notes = Hive.box<NoteModel>(kNotesBox);
+      Box<NoteModel> notes = Hive.box(kNotesBox);
+      await notes.deleteAt(index);
       notesList = notes.values.toList();
       emit(NoteSuccess());
     } catch (e) {
-      emit(NoteFailure(e.toString())) ;
+      emit(NoteFailure(e.toString()));
     }
   }
 }
