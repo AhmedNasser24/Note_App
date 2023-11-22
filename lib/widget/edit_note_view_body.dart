@@ -11,21 +11,23 @@ class EditNoteViewBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: Column(
-        children: const [
-          Gap(30),
-          CustomAppBar(title: 'Edit Note', icon: Icons.check),
-          Gap(20),
-          CustomTextFormField(
-            hintText: 'title',
-            maxLines: 1,
-          ),
-          Gap(20),
-          CustomTextFormField(
-            hintText: 'content',
-            maxLines: 5,
-          ),
-        ],
+      child: SingleChildScrollView(
+        child: Column(
+          children: const [
+            Gap(30),
+            CustomAppBar(title: 'Edit Note', icon: Icons.check),
+            Gap(20),
+            CustomTextFormField(
+              hintText: 'title',
+              maxLines: 1,
+            ),
+            Gap(20),
+            CustomTextFormField(
+              hintText: 'content',
+              maxLines: 5,
+            ),
+          ],
+        ),
       ),
     );
   }

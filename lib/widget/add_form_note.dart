@@ -58,6 +58,7 @@ class _AddFormNoteState extends State<AddFormNote> {
               }
             },
           ),
+          
           const Gap(50),
           BlocBuilder<AddNoteCubit, AddNoteState>(
             builder: (context, state) {

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:note_app/views/edit_note_view.dart';
-
+import 'package:note_app/models/note_model.dart' ;
 class NoteItem extends StatelessWidget {
-  const NoteItem({super.key});
-
+  const NoteItem({super.key , required this.note});
+  final NoteModel note ;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -25,9 +25,9 @@ class NoteItem extends StatelessWidget {
           children: [
             ListTile(
               contentPadding: const EdgeInsets.all(0),
-              title: const Text(
-                'Flutter tips',
-                style: TextStyle(fontSize: 28, color: Colors.black),
+              title: Text(
+                note.title,
+                style: const TextStyle(fontSize: 28, color: Colors.black),
               ),
               trailing: IconButton(
                   onPressed: () {},
@@ -36,9 +36,9 @@ class NoteItem extends StatelessWidget {
                     color: Colors.black,
                     size: 40,
                   )),
-              subtitle: const Text(
-                'with Allah nothing is difficult',
-                style: TextStyle(fontSize: 15, color: Colors.black),
+              subtitle:  Text(
+                note.subTitle,
+                style: const TextStyle(fontSize: 15, color: Colors.black),
               ),
             ),
             const Gap(15),
