@@ -10,12 +10,13 @@ class FetchAndDeleteNoteCubit extends Cubit<NoteState> {
     fetchAllNotes();
   }
   List<NoteModel> notesList = [];
-  fetchAllNotes() {
+  void fetchAllNotes() {
     Box<NoteModel> notes = Hive.box<NoteModel>(kNotesBox);
     notesList = notes.values.toList();
+    emit(NoteSuccess()) ;
   }
 
-  deleteNote(int index) async {
+  Future <void> deleteNote(int index) async {
     emit(NoteLoading());
     try {
       Box<NoteModel> notes = Hive.box(kNotesBox);

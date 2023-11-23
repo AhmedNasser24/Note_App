@@ -4,7 +4,6 @@ import 'package:gap/gap.dart';
 import 'package:note_app/cubits/note/note_cubit.dart';
 import 'package:note_app/views/edit_note_view.dart';
 import 'package:note_app/models/note_model.dart' ;
-import 'package:intl/intl.dart';
 
 class NoteItem extends StatelessWidget {
   const NoteItem({super.key , required this.note, required this.index});
@@ -35,8 +34,10 @@ class NoteItem extends StatelessWidget {
                 style: const TextStyle(fontSize: 28, color: Colors.black),
               ),
               trailing: IconButton(
-                  onPressed: () {
-                    BlocProvider.of<FetchAndDeleteNoteCubit>(context).deleteNote(index) ;
+                  onPressed: () async {
+                    await  note.delete() ;
+                    // await BlocProvider.of<FetchAndDeleteNoteCubit>(context).deleteNote(index) ;
+                    BlocProvider.of<FetchAndDeleteNoteCubit>(context).fetchAllNotes() ;
                   },
                   icon: const Icon(
                     Icons.delete,
@@ -50,7 +51,7 @@ class NoteItem extends StatelessWidget {
             ),
             const Gap(15),
              Text(
-              DateFormat('yyyy-MM-dd').format(DateTime.parse(note.date)),
+              note.date,
               style: const TextStyle(fontSize: 15, color: Colors.black),
             )
           ],

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:intl/intl.dart';
 import 'package:note_app/cubits/add_note_cubit/add_note_cubit.dart';
+import 'package:note_app/cubits/note/note_cubit.dart';
 import 'package:note_app/models/note_model.dart';
 
 import 'custom_button.dart';
@@ -64,16 +66,19 @@ class _AddFormNoteState extends State<AddFormNote> {
             builder: (context, state) {
               return CustomButton(
                 text: 'Add',
-                onTap: () {
+                onTap: () async {
                   if (formKey.currentState!.validate()) {
                     formKey.currentState!.save();
+                    DateTime dateTime = DateTime.now() ;
+                    String dateNow = DateFormat('dd/mm/yyyy').format(dateTime) ;
                     NoteModel newNote = NoteModel(
                         title: title!,
                         subTitle: subtitle!,
-                        date: DateTime.now().toString(),
+                        date: dateNow,
                         color: Colors.blue.value);
-                    BlocProvider.of<AddNoteCubit>(context)
+                    await BlocProvider.of<AddNoteCubit>(context)
                         .addNote(newNote: newNote);
+                    BlocProvider.of<FetchAndDeleteNoteCubit>(context).fetchAllNotes() ;    
                   }else {
                     autovalidateMode = AutovalidateMode.always ;
                     setState(() {
