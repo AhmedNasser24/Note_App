@@ -20,6 +20,7 @@ class FetchAndDeleteNoteCubit extends Cubit<NoteState> {
     emit(NoteLoading());
     try {
       Box<NoteModel> notes = Hive.box(kNotesBox);
+      
       await notes.deleteAt(index);
       notesList = notes.values.toList();
       emit(NoteSuccess());

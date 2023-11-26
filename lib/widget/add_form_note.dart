@@ -73,7 +73,7 @@ class _AddFormNoteState extends State<AddFormNote> {
                     String dateNow = DateFormat('dd/mm/yyyy').format(dateTime) ;
                     NoteModel newNote = NoteModel(
                         title: title!,
-                        subTitle: subtitle!,
+                        content: subtitle!,
                         date: dateNow,
                         color: Colors.blue.value);
                     await BlocProvider.of<AddNoteCubit>(context)

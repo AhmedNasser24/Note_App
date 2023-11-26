@@ -11,7 +11,7 @@ class CustomTextFormField extends StatelessWidget {
     this.keyboardType,
     this.contentPadding,
     this.maxLines,
-    this.onSaved,
+    this.onSaved, this.controller,
   });
   final Function(String)? onChanged;
   final void Function(String?)? onSaved;
@@ -20,10 +20,11 @@ class CustomTextFormField extends StatelessWidget {
   final String? Function(String?)? validator;
   final EdgeInsetsGeometry? contentPadding;
   final int? maxLines;
-
+  final TextEditingController? controller ;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: controller ,
       validator: validator,
       keyboardType: keyboardType,
       onChanged: onChanged,
