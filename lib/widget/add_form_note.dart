@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
 import 'package:note_app/cubits/add_note_cubit/add_note_cubit.dart';
-import 'package:note_app/cubits/note/note_cubit.dart';
+import 'package:note_app/cubits/note/fetch_and_delete_note_cubit.dart';
 import 'package:note_app/models/note_model.dart';
 
 import 'custom_button.dart';
@@ -22,12 +22,12 @@ class _AddFormNoteState extends State<AddFormNote> {
   final GlobalKey<FormState> formKey = GlobalKey();
 
   String? title, subtitle;
-  AutovalidateMode autovalidateMode = AutovalidateMode.disabled ;
+  AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
   @override
   Widget build(BuildContext context) {
     return Form(
       key: formKey,
-      autovalidateMode: AutovalidateMode.always,
+      autovalidateMode: AutovalidateMode.disabled,
       child: Column(
         children: [
           const Gap(20),
@@ -60,7 +60,6 @@ class _AddFormNoteState extends State<AddFormNote> {
               }
             },
           ),
-          
           const Gap(50),
           BlocBuilder<AddNoteCubit, AddNoteState>(
             builder: (context, state) {
@@ -68,22 +67,10 @@ class _AddFormNoteState extends State<AddFormNote> {
                 text: 'Add',
                 onTap: () async {
                   if (formKey.currentState!.validate()) {
-                    formKey.currentState!.save();
-                    DateTime dateTime = DateTime.now() ;
-                    String dateNow = DateFormat('dd/mm/yyyy').format(dateTime) ;
-                    NoteModel newNote = NoteModel(
-                        title: title!,
-                        content: subtitle!,
-                        date: dateNow,
-                        color: Colors.blue.value);
-                    await BlocProvider.of<AddNoteCubit>(context)
-                        .addNote(newNote: newNote);
-                    BlocProvider.of<FetchAndDeleteNoteCubit>(context).fetchAllNotes() ;    
-                  }else {
-                    autovalidateMode = AutovalidateMode.always ;
-                    setState(() {
-                      
-                    });
+                    await addNote(context);
+                  } else {
+                    autovalidateMode = AutovalidateMode.always;
+                    setState(() {});
                   }
                 },
                 textColor: Colors.black,
@@ -94,5 +81,17 @@ class _AddFormNoteState extends State<AddFormNote> {
         ],
       ),
     );
+  }
+
+  Future<void> addNote(BuildContext context) async {
+    formKey.currentState!.save();
+    DateTime dateTime = DateTime.now();
+    String dateNow = DateFormat('dd/mm/yyyy').format(dateTime);
+    NoteModel newNote = NoteModel(
+        title: title!,
+        content: subtitle!,
+        date: dateNow,
+        color: Colors.blue.value);
+    await BlocProvider.of<AddNoteCubit>(context).addNote(newNote: newNote);
   }
 }

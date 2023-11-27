@@ -3,7 +3,7 @@ import 'package:hive/hive.dart';
 import 'package:note_app/constant.dart';
 import 'package:note_app/models/note_model.dart';
 
-part 'note_state.dart';
+part 'fetch_and_delete_note_state.dart';
 
 class FetchAndDeleteNoteCubit extends Cubit<NoteState> {
   FetchAndDeleteNoteCubit() : super(NoteInitial()) {

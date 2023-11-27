@@ -1,4 +1,4 @@
-part of 'note_cubit.dart';
+part of 'fetch_and_delete_note_cubit.dart';
 
 abstract class NoteState {}
 

@@ -25,14 +25,14 @@ class CustomButton extends StatelessWidget {
         decoration: BoxDecoration(
             color: kPrimaryColor, borderRadius: BorderRadius.circular(12)),
         child: Center(
-          child: isLoading 
+          child: isLoading
               ? const SizedBox(
-                height: 20 , width: 20,
-                child:  CircularProgressIndicator(
+                  height: 20,
+                  width: 20,
+                  child: CircularProgressIndicator(
                     color: Colors.black,
-                    
                   ),
-              )
+                )
               : Text(
                   text,
                   style: TextStyle(

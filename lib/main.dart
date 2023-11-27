@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:hive_flutter/adapters.dart';
 import 'package:note_app/constant.dart';
-import 'package:note_app/cubits/note/note_cubit.dart';
+import 'package:note_app/cubits/note/fetch_and_delete_note_cubit.dart';
 import 'package:note_app/views/note_view.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'models/note_model.dart';
