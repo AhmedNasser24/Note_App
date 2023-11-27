@@ -5,7 +5,7 @@ part 'select_color_state.dart';
 
 class SelectColorCubit extends Cubit<SelectColorState> {
   SelectColorCubit() : super(SelectColorInitial());
-  int colorItemIndex = -1 ;
+  int colorItemIndex = 0;
   selectColorItem( int index ){
     colorItemIndex = index ;
     emit(SelectColorSuccess()) ;

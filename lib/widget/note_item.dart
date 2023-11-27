@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:note_app/cubits/note/fetch_and_delete_note_cubit.dart';
+import 'package:note_app/cubits/select_color/select_color_cubit.dart';
 import 'package:note_app/views/edit_note_view.dart';
 import 'package:note_app/models/note_model.dart';
 
@@ -12,12 +13,15 @@ class NoteItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => EditNoteView(note: note),
-        ),
-      ),
+      onTap: () {
+        BlocProvider.of<SelectColorCubit>(context).colorItemIndex = -1 ;
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => EditNoteView(note: note),
+          ),
+        );
+      },
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 4),
         padding:

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:note_app/cubits/select_color/select_color_cubit.dart';
 
 import '../widget/add_note_bottom_sheet.dart';
 
@@ -13,6 +15,10 @@ class NoteView extends StatelessWidget {
       
       floatingActionButton: FloatingActionButton(
         onPressed: () {
+          if ( BlocProvider.of<SelectColorCubit>(context).colorItemIndex == -1){
+            BlocProvider.of<SelectColorCubit>(context).colorItemIndex = 0 ;
+          }
+             
           showModalBottomSheet(
             useSafeArea: true ,
             isScrollControlled: true,

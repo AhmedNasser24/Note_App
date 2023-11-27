@@ -5,6 +5,7 @@ import 'package:note_app/constant.dart';
 import 'package:note_app/cubits/note/fetch_and_delete_note_cubit.dart';
 import 'package:note_app/views/note_view.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'cubits/select_color/select_color_cubit.dart';
 import 'models/note_model.dart';
 import 'simple_bloc_observer.dart';
 
@@ -24,8 +25,11 @@ class NoteApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => FetchAndDeleteNoteCubit(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => SelectColorCubit()),
+        BlocProvider(create: (context) => FetchAndDeleteNoteCubit()),
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(

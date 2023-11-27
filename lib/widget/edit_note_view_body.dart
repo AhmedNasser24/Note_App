@@ -3,7 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:note_app/constant.dart';
 import 'package:note_app/cubits/note/fetch_and_delete_note_cubit.dart';
+import 'package:note_app/cubits/select_color/select_color_cubit.dart';
 import 'package:note_app/widget/custom_app_bar.dart';
+import 'package:note_app/widget/list_color_item.dart';
 import 'package:note_app/widget/show_snack_bar.dart';
 
 import '../models/note_model.dart';
@@ -43,8 +45,13 @@ class _EditNoteViewBodyState extends State<EditNoteViewBody> {
               title: 'Edit Note',
               icon: Icons.check,
               onPressed: () {
+                int selectedColor =
+                    BlocProvider.of<SelectColorCubit>(context).colorItemIndex;
                 widget.note.title = title ?? widget.note.title;
                 widget.note.content = content ?? widget.note.content;
+                widget.note.color = selectedColor != -1
+                    ? kColorsList[selectedColor].value
+                    : widget.note.color;
                 widget.note.save();
                 BlocProvider.of<FetchAndDeleteNoteCubit>(context)
                     .fetchAllNotes();
@@ -80,6 +87,7 @@ class _EditNoteViewBodyState extends State<EditNoteViewBody> {
               hintText: widget.note.content,
               maxLines: 5,
             ),
+            const ListColorItem()
           ],
         ),
       ),

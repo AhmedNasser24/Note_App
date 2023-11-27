@@ -5,7 +5,10 @@ import 'package:intl/intl.dart';
 import 'package:note_app/cubits/add_note_cubit/add_note_cubit.dart';
 import 'package:note_app/cubits/note/fetch_and_delete_note_cubit.dart';
 import 'package:note_app/models/note_model.dart';
+import 'package:note_app/widget/show_snack_bar.dart';
 
+import '../constant.dart';
+import '../cubits/select_color/select_color_cubit.dart';
 import 'custom_button.dart';
 import 'custom_text_form_field.dart';
 import 'list_color_item.dart';
@@ -23,12 +26,13 @@ class _AddFormNoteState extends State<AddFormNote> {
   final GlobalKey<FormState> formKey = GlobalKey();
 
   String? title, subtitle;
+  int selectedColor = -1;
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
   @override
   Widget build(BuildContext context) {
     return Form(
       key: formKey,
-      autovalidateMode: AutovalidateMode.disabled,
+      autovalidateMode: autovalidateMode,
       child: Column(
         children: [
           const Gap(20),
@@ -67,9 +71,13 @@ class _AddFormNoteState extends State<AddFormNote> {
               return CustomButton(
                 text: 'Add',
                 onTap: () async {
+                  selectedColor = BlocProvider.of<SelectColorCubit>(context)
+                      .colorItemIndex;
+                  
                   if (formKey.currentState!.validate()) {
                     await addNote(context);
-                  } else {
+                  }
+                  else if (autovalidateMode != AutovalidateMode.always) {
                     autovalidateMode = AutovalidateMode.always;
                     setState(() {});
                   }
@@ -87,12 +95,13 @@ class _AddFormNoteState extends State<AddFormNote> {
   Future<void> addNote(BuildContext context) async {
     formKey.currentState!.save();
     DateTime dateTime = DateTime.now();
-    String dateNow = DateFormat('dd/mm/yyyy').format(dateTime);
+    String dateNow = DateFormat('dd/MM/yyyy').format(dateTime);
     NoteModel newNote = NoteModel(
-        title: title!,
-        content: subtitle!,
-        date: dateNow,
-        color: Colors.blue.value);
+      title: title!,
+      content: subtitle!,
+      date: dateNow,
+      color: kColorsList[selectedColor].value,
+    );
     await BlocProvider.of<AddNoteCubit>(context).addNote(newNote: newNote);
   }
 }
