@@ -22,6 +22,7 @@ class NoteItemList extends StatelessWidget {
         return ModalProgressHUD(
           inAsyncCall: state is NoteLoading ? true : false,
           child: ListView.builder(
+            physics: const BouncingScrollPhysics(decelerationRate: ScrollDecelerationRate.fast),
             padding: const EdgeInsets.only(top: 5),
             itemCount: notesList.length,
             itemBuilder: (context, index) =>  NoteItem(note: notesList[index] , index: index,),
