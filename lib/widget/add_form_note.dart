@@ -8,6 +8,7 @@ import 'package:note_app/models/note_model.dart';
 
 import 'custom_button.dart';
 import 'custom_text_form_field.dart';
+import 'list_color_item.dart';
 
 class AddFormNote extends StatefulWidget {
   const AddFormNote({
@@ -60,7 +61,7 @@ class _AddFormNoteState extends State<AddFormNote> {
               }
             },
           ),
-          const Gap(50),
+          const ListColorItem(),
           BlocBuilder<AddNoteCubit, AddNoteState>(
             builder: (context, state) {
               return CustomButton(
