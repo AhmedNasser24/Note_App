@@ -13,10 +13,10 @@ class NoteAppBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+    return const Padding(
+      padding: EdgeInsets.symmetric(horizontal: 16.0),
       child: Column(
-        children: const [
+        children: [
           Gap(40),
           CustomAppBar(title: 'Note' , icon: Icons.search,),
           Expanded(child: NoteItemList()),

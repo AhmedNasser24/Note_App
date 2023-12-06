@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:note_app/cubits/note/fetch_and_delete_note_cubit.dart';
 import 'package:note_app/models/note_model.dart';
-import 'package:note_app/widget/show_snack_bar.dart';
 
 import 'note_item.dart';
 

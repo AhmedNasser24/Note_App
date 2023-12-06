@@ -3,9 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
 import 'package:note_app/cubits/add_note_cubit/add_note_cubit.dart';
-import 'package:note_app/cubits/note/fetch_and_delete_note_cubit.dart';
 import 'package:note_app/models/note_model.dart';
-import 'package:note_app/widget/show_snack_bar.dart';
 
 import '../constant.dart';
 import '../cubits/select_color/select_color_cubit.dart';
